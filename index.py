@@ -31,5 +31,5 @@ try:
 
 except Exception as e:
     class DefPage(webapp2.RequestHandler):
-        def get(self):self.response.write("<html><body>Web-site is under development. What?!</body></htnl><!--\n%s\n-->" % e.message)
+        def get(self):self.response.write("<html><body>Web-site is under development. What?!?!?!</body></htnl><!--\n%s\n-->" % e.message)
     a2 = webapp2.WSGIApplication([('.*', DefPage)], debug=True)
