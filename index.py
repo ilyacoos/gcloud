@@ -1,6 +1,22 @@
 #import cgi
 import webapp2
 
+class DefPage(webapp2.RequestHandler):
+    def get(self):
+        from Crowler import Crowler
+        from Views import FullScreenAll as FSA
+        c = Crowler("investfunds.pif", {"fund": 1003})
+        
+        o = c.get("01.07.2018", "04.10.2018")
+        
+        tbl = [['Data', 'Pie', 'Users']]
+        for r in o.keys():
+            # print( ",[new Date(%d), %f, %f]" % (r, o[r]["share"], o[r]["volume"]/o[r]["share"]/1000000) )
+            tbl.append([r, o[r]["share"], o[r]["volume"]/o[r]["share"]/2000000])
+        
+        out = FSA(tbl)
+        self.response.write( out.show() )
+
 class Stat(webapp2.RequestHandler):
     def get(self):
         try:
@@ -49,6 +65,10 @@ try:
         ('/a2/torrent/kill', KillTorrent),
         ('/a2/torrent/pending', Pending),
         ('/a2/stat', Statistic)
+    ], debug=True)
+    
+    main = webapp2.WSGIApplication([
+       ('/pif', Pif)
     ], debug=True)
 
 except Exception as e:

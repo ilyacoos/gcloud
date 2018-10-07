@@ -62,13 +62,27 @@ def testURL():
     
 
 def testTest(p):
-    from Crowler import Crowler
+    """from Crowler import Crowler
     c = Crowler("http://pif.investfunds.ru/funds/54/detail/1/?&day1=01&month1=12&year1=2017&day2=21&month2=09&year2=2018&date1=01.12.2017&date2=21.09.2018&start=90&rand=0.6264447805138752#beginf",
                 [["div", {"class":"tabs-inner tabs-inner-active"}], ["table", {"class":"table-data"}, 1], ["tr", None, [1, None]] ],
                 [ ["td",None,0], ["td",None,1], ["td",None,2] ]
                  )
     
     print ( c.get() )
+    """
+    from Crowler import Crowler
+    from Views import FullScreenAll as FSA
+    c = Crowler("investfunds.pif", {"fund": 1003})
+    
+    o = c.get("01.07.2018", "04.10.2018")
+    
+    tbl = [['Data', 'Pie', 'Users']]
+    for r in o.keys():
+        # print( ",[new Date(%d), %f, %f]" % (r, o[r]["share"], o[r]["volume"]/o[r]["share"]/1000000) )
+        tbl.append([r, o[r]["share"], o[r]["volume"]/o[r]["share"]/2000000])
+    
+    out = FSA(tbl)
+    print (out.show())
     
 if __name__ == '__main__':
     testTest([0,0])
