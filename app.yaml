@@ -14,9 +14,9 @@ handlers:
 # [END handlers]
 
 # [START libraries]
-libraries:
-- name: webapp2
-  version: latest
+#libraries:
+#- name: webapp2
+#  version: latest
 # [END libraries]
 
 
